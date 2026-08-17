@@ -10,7 +10,7 @@
 
   <project path="contest2026_133_yigetuandui" name="contest2026_133_yigetuandui">
     <linkfile src="app/hello_app" dest="packages/demos/contest2026_133_hello_app"/>
-    <linkfile src="quickapp/hello_quickapp" dest="packages/apps/contest2026_133_hello_quickapp"/>
+    <linkfile src="quickapp/aura_space" dest="packages/apps/contest2026_133_aura_space"/>
     <linkfile src="board/contest_board" dest="vendor/openvela/boards/contest2026_133_board"/>
   </project>
 </manifest>

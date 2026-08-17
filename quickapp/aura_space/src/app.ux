@@ -1,0 +1,10 @@
+<script>
+export default {
+  onCreate() {
+    console.info('Aura-Space created')
+  },
+  onDestroy() {
+    console.info('Aura-Space destroyed')
+  }
+}
+</script>
