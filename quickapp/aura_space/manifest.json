@@ -1,0 +1,29 @@
+{
+  "package": "com.openvela.contest2026.team133.auraspace",
+  "name": "心流节拍",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "minAPILevel": 1,
+  "minPlatformVersion": 1,
+  "icon": "/common/logo.svg",
+  "deviceTypeList": ["watch"],
+  "features": [
+    { "name": "system.velaclaw" }
+  ],
+  "config": {
+    "logLevel": "info",
+    "designWidth": 466
+  },
+  "display": {
+    "backgroundColor": "#061314"
+  },
+  "router": {
+    "entry": "pages/index",
+    "pages": {
+      "pages/index": {
+        "component": "index",
+        "path": "/"
+      }
+    }
+  }
+}

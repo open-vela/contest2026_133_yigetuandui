@@ -1,0 +1,11 @@
+{
+  "name": "contest2026-team133-aura-space",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aura-Space openvela watch quick app",
+  "scripts": {
+    "check": "node scripts/validate.mjs",
+    "build": "aiot build",
+    "release": "aiot release"
+  }
+}

@@ -1,0 +1,512 @@
+<template>
+  <div class="app-shell">
+    <div class="screen home-screen" if="{{viewHome}}">
+      <div class="top-row">
+        <div>
+          <text class="eyebrow">AURA-SPACE · DAY 7</text>
+          <text class="title">今天也进入心流</text>
+        </div>
+        <text class="battery">76%</text>
+      </div>
+
+      <div class="score-card">
+        <div class="score-ring">
+          <text class="score-number">82</text>
+          <text class="score-label">FOCUS</text>
+        </div>
+        <div class="score-copy">
+          <text class="score-title">今日状态良好</text>
+          <text class="score-tip">记忆维度稍弱，先呼吸再训练</text>
+          <div class="metric-row">
+            <text class="metric">286ms 反应</text>
+            <text class="metric">68% 记忆</text>
+          </div>
+        </div>
+      </div>
+
+      <text class="section-title">开始训练</text>
+      <div class="module-row">
+        <div class="module gold" onclick="goBeat">
+          <text class="module-icon">♪</text>
+          <text class="module-name">体感节奏</text>
+          <text class="module-meta">3 分钟</text>
+        </div>
+        <div class="module pink" onclick="goNback">
+          <text class="module-icon">N</text>
+          <text class="module-name">工作记忆</text>
+          <text class="module-meta">2-Back</text>
+        </div>
+      </div>
+      <div class="module-row second-row">
+        <div class="module green" onclick="goFocus">
+          <text class="module-icon">◎</text>
+          <text class="module-name">呼吸光环</text>
+          <text class="module-meta">4 / 6 节奏</text>
+        </div>
+        <div class="module blue" onclick="goCoach">
+          <text class="module-icon">✦</text>
+          <text class="module-name">AI 教练</text>
+          <text class="module-meta">个性建议</text>
+        </div>
+      </div>
+      <text class="author">前端与 UI：秦家依 · Mock 数据可独立演示</text>
+    </div>
+
+    <div class="screen beat-screen" if="{{viewBeat}}">
+      <div class="top-row compact">
+        <div>
+          <text class="eyebrow gold-text">BEATFLICKS · 118 BPM</text>
+          <text class="title">体感节奏</text>
+        </div>
+        <text class="tiny-chip">ADAPTIVE</text>
+      </div>
+      <div class="game-stats">
+        <div><text class="stat-label">SCORE</text><text class="stat-value">{{beatScore}}</text></div>
+        <text class="judgement">{{beatJudgement}}</text>
+        <div><text class="stat-label right">COMBO</text><text class="stat-value right">{{beatCombo}}</text></div>
+      </div>
+      <div class="lanes">
+        <div class="lane"><text class="note green-note" if="{{targetLeft}}">↖</text></div>
+        <div class="lane middle"><text class="note gold-note" if="{{targetUp}}">↑</text></div>
+        <div class="lane"><text class="note blue-note" if="{{targetRight}}">↗</text></div>
+        <div class="hit-line"></div>
+      </div>
+      <text class="beat-hint">跟随目标，点击对应甩腕方向</text>
+      <div class="gesture-row">
+        <div class="gesture-btn" onclick="hitLeft"><text>↖</text><text class="gesture-label">左甩</text></div>
+        <div class="gesture-btn active-gesture" onclick="hitUp"><text>↑</text><text class="gesture-label">上抛</text></div>
+        <div class="gesture-btn" onclick="hitRight"><text>↗</text><text class="gesture-label">右甩</text></div>
+      </div>
+      <text class="hardware-note">真机由 IMU gesture:detected 事件替换触控</text>
+    </div>
+
+    <div class="screen nback-screen" if="{{viewNback}}">
+      <div class="top-row compact">
+        <div><text class="eyebrow pink-text">SYNAPSE-N · DUAL CHANNEL</text><text class="title">记忆矩阵</text></div>
+        <text class="tiny-chip">{{nLevel}}-BACK</text>
+      </div>
+      <div class="n-grid">
+        <div class="n-cell {{cell0}}"></div>
+        <div class="n-cell {{cell1}}"></div>
+        <div class="n-cell {{cell2}}"></div>
+        <div class="n-cell {{cell3}}"></div>
+      </div>
+      <div class="n-status">
+        <div><text class="score-title">刺激 {{stimulusIndex}}</text><text class="score-tip">判断是否与 2 步前一致</text></div>
+        <text class="accuracy">{{nAccuracy}}%</text>
+      </div>
+      <div class="answer-row">
+        <div class="answer-btn" onclick="answerSame"><text>相同</text></div>
+        <div class="answer-btn" onclick="answerDifferent"><text>不同</text></div>
+      </div>
+      <text class="feedback">{{nFeedback}}</text>
+      <text class="hardware-note">正确短震 1 次 · 错误短震 2 次（接口已预留）</text>
+    </div>
+
+    <div class="screen focus-screen" if="{{viewFocus}}">
+      <div class="top-row compact">
+        <div><text class="eyebrow">AURA-FOCUS · 4 / 6</text><text class="title">呼吸光环</text></div>
+        <text class="tiny-chip">LOW POWER</text>
+      </div>
+      <div class="breath-stage">
+        <div class="breath-orbit {{breathClass}}">
+          <div class="breath-core">
+            <text class="breath-phase">{{breathPhase}}</text>
+            <text class="breath-seconds">{{breathSeconds}}</text>
+          </div>
+        </div>
+      </div>
+      <text class="timer">{{focusTime}}</text>
+      <text class="focus-copy">把注意力放在光环的扩张与收缩上</text>
+      <div class="focus-actions">
+        <div class="primary-btn" onclick="toggleBreath"><text>{{focusAction}}</text></div>
+        <div class="secondary-btn" onclick="resetBreath"><text>重置</text></div>
+      </div>
+      <text class="hardware-note">训练 200Hz · 亮屏 50Hz · 后台 10Hz</text>
+    </div>
+
+    <div class="screen coach-screen" if="{{viewCoach}}">
+      <div class="top-row compact">
+        <div><text class="eyebrow blue-text">VELACLAW · ON-DEVICE AI</text><text class="title">AI 数据教练</text></div>
+        <text class="tiny-chip">{{coachSource}}</text>
+      </div>
+      <div class="coach-card">
+        <text class="coach-kicker">今日洞察</text>
+        <text class="coach-answer">{{coachAnswer}}</text>
+      </div>
+      <text class="section-title">快捷提问</text>
+      <div class="quick-row">
+        <div class="quick-btn" onclick="askToday"><text>今天怎么练</text></div>
+        <div class="quick-btn" onclick="askMemory"><text>提升记忆</text></div>
+      </div>
+      <div class="quick-row second-row">
+        <div class="quick-btn" onclick="askStress"><text>感觉疲劳</text></div>
+        <div class="quick-btn" onclick="askReaction"><text>提升反应</text></div>
+      </div>
+      <div class="coach-status">
+        <div class="status-dot"></div>
+        <text>{{coachStatus}}</text>
+      </div>
+      <text class="hardware-note">AI 不可用时自动降级为本地规则建议</text>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="nav-item {{navHome}}" onclick="goHome"><text class="nav-icon">⌂</text><text class="nav-label">今日</text></div>
+      <div class="nav-item {{navBeat}}" onclick="goBeat"><text class="nav-icon">♪</text><text class="nav-label">音游</text></div>
+      <div class="nav-item {{navNback}}" onclick="goNback"><text class="nav-icon">N</text><text class="nav-label">记忆</text></div>
+      <div class="nav-item {{navFocus}}" onclick="goFocus"><text class="nav-icon">◎</text><text class="nav-label">呼吸</text></div>
+      <div class="nav-item {{navCoach}}" onclick="goCoach"><text class="nav-icon">✦</text><text class="nav-label">教练</text></div>
+    </div>
+  </div>
+</template>
+
+<script>
+import velaclaw from '@system.velaclaw'
+
+const N_SEQUENCE = [0, 3, 1, 0, 2, 3, 2, 1, 0, 1, 3, 1]
+
+export default {
+  private: {
+    viewHome: true,
+    viewBeat: false,
+    viewNback: false,
+    viewFocus: false,
+    viewCoach: false,
+    navHome: 'selected',
+    navBeat: '',
+    navNback: '',
+    navFocus: '',
+    navCoach: '',
+    beatScore: '000000',
+    beatCombo: 0,
+    beatJudgement: '准备开始',
+    beatTarget: 'up',
+    targetLeft: false,
+    targetUp: true,
+    targetRight: false,
+    nLevel: 2,
+    stimulusIndex: 1,
+    nAccuracy: 100,
+    nCorrect: 0,
+    nAnswers: 0,
+    nFeedback: '先观察两个刺激',
+    cell0: 'active-green',
+    cell1: '',
+    cell2: '',
+    cell3: '',
+    breathClass: '',
+    breathPhase: '准备',
+    breathSeconds: '4s / 6s',
+    focusTime: '04:00',
+    focusAction: '开始引导',
+    coachSource: 'LOCAL',
+    coachStatus: '端侧 AI 待命',
+    coachAnswer: '记忆维度还有提升空间。建议先做 4 分钟呼吸，再进行 2 组 2-Back。'
+  },
+
+  onInit() {
+    this.startNbackClock()
+  },
+
+  onDestroy() {
+    this.clearTimers()
+  },
+
+  clearTimers() {
+    if (this.beatTimer) clearInterval(this.beatTimer)
+    if (this.nTimer) clearInterval(this.nTimer)
+    if (this.focusTimer) clearInterval(this.focusTimer)
+    if (this.phaseTimer) clearTimeout(this.phaseTimer)
+    this.beatTimer = null
+    this.nTimer = null
+    this.focusTimer = null
+    this.phaseTimer = null
+  },
+
+  showView(name) {
+    this.clearTimers()
+    this.viewHome = name === 'home'
+    this.viewBeat = name === 'beat'
+    this.viewNback = name === 'nback'
+    this.viewFocus = name === 'focus'
+    this.viewCoach = name === 'coach'
+    this.navHome = this.viewHome ? 'selected' : ''
+    this.navBeat = this.viewBeat ? 'selected' : ''
+    this.navNback = this.viewNback ? 'selected' : ''
+    this.navFocus = this.viewFocus ? 'selected' : ''
+    this.navCoach = this.viewCoach ? 'selected' : ''
+    if (name === 'beat') this.startBeatClock()
+    if (name === 'nback') this.startNbackClock()
+  },
+
+  goHome() { this.showView('home') },
+  goBeat() { this.showView('beat') },
+  goNback() { this.showView('nback') },
+  goFocus() { this.showView('focus') },
+  goCoach() { this.showView('coach') },
+
+  startBeatClock() {
+    this.nextBeatTarget()
+    this.beatTimer = setInterval(() => this.nextBeatTarget(), 850)
+  },
+
+  nextBeatTarget() {
+    const order = ['left', 'up', 'right', 'up', 'left', 'right']
+    this.beatStep = ((this.beatStep || 0) + 1) % order.length
+    this.beatTarget = order[this.beatStep]
+    this.targetLeft = this.beatTarget === 'left'
+    this.targetUp = this.beatTarget === 'up'
+    this.targetRight = this.beatTarget === 'right'
+  },
+
+  judgeBeat(type) {
+    if (type === this.beatTarget) {
+      this.beatCombo += 1
+      const value = Number(this.beatScore) + 1000 + Math.floor(this.beatCombo / 10) * 100
+      this.beatScore = String(value).padStart(6, '0')
+      this.beatJudgement = this.beatCombo % 4 === 0 ? 'PERFECT' : 'GOOD'
+      this.nextBeatTarget()
+    } else {
+      this.beatCombo = 0
+      this.beatJudgement = 'MISS'
+    }
+  },
+
+  hitLeft() { this.judgeBeat('left') },
+  hitUp() { this.judgeBeat('up') },
+  hitRight() { this.judgeBeat('right') },
+
+  startNbackClock() {
+    this.showStimulus()
+    this.nTimer = setInterval(() => this.showStimulus(), 1850)
+  },
+
+  showStimulus() {
+    const position = N_SEQUENCE[(this.stimulusIndex - 1) % N_SEQUENCE.length]
+    this.cell0 = position === 0 ? 'active-green' : ''
+    this.cell1 = position === 1 ? 'active-blue' : ''
+    this.cell2 = position === 2 ? 'active-gold' : ''
+    this.cell3 = position === 3 ? 'active-pink' : ''
+    this.stimulusIndex += 1
+    if (this.stimulusIndex > N_SEQUENCE.length) this.stimulusIndex = 1
+  },
+
+  expectedSame() {
+    const current = (this.stimulusIndex - 2 + N_SEQUENCE.length) % N_SEQUENCE.length
+    const previous = (current - this.nLevel + N_SEQUENCE.length) % N_SEQUENCE.length
+    return N_SEQUENCE[current] === N_SEQUENCE[previous]
+  },
+
+  judgeNback(answer) {
+    if (this.stimulusIndex <= this.nLevel + 1) {
+      this.nFeedback = '继续观察，建立记忆序列'
+      return
+    }
+    const correct = answer === this.expectedSame()
+    this.nAnswers += 1
+    if (correct) this.nCorrect += 1
+    this.nAccuracy = Math.round(this.nCorrect / this.nAnswers * 100)
+    this.nFeedback = correct ? '判断正确 · 单次短震' : '判断错误 · 两次短震'
+  },
+
+  answerSame() { this.judgeNback(true) },
+  answerDifferent() { this.judgeNback(false) },
+
+  toggleBreath() {
+    if (this.focusRunning) {
+      this.focusRunning = false
+      if (this.focusTimer) clearInterval(this.focusTimer)
+      if (this.phaseTimer) clearTimeout(this.phaseTimer)
+      this.focusAction = '继续引导'
+      this.breathPhase = '暂停'
+      this.breathClass = ''
+      return
+    }
+    this.focusRunning = true
+    this.focusAction = '暂停'
+    if (this.focusRemaining === undefined) this.focusRemaining = 240
+    this.startInhale()
+    this.focusTimer = setInterval(() => {
+      this.focusRemaining -= 1
+      if (this.focusRemaining <= 0) {
+        this.focusRemaining = 0
+        this.focusRunning = false
+        clearInterval(this.focusTimer)
+        if (this.phaseTimer) clearTimeout(this.phaseTimer)
+        this.focusAction = '再次开始'
+        this.breathPhase = '完成'
+        this.breathClass = ''
+      }
+      this.focusTime = this.formatTime(this.focusRemaining)
+    }, 1000)
+  },
+
+  startInhale() {
+    if (!this.focusRunning) return
+    this.breathPhase = '吸气'
+    this.breathSeconds = '4 秒'
+    this.breathClass = 'inhale'
+    this.phaseTimer = setTimeout(() => this.startExhale(), 4000)
+  },
+
+  startExhale() {
+    if (!this.focusRunning) return
+    this.breathPhase = '呼气'
+    this.breathSeconds = '6 秒'
+    this.breathClass = 'exhale'
+    this.phaseTimer = setTimeout(() => this.startInhale(), 6000)
+  },
+
+  resetBreath() {
+    if (this.focusTimer) clearInterval(this.focusTimer)
+    if (this.phaseTimer) clearTimeout(this.phaseTimer)
+    this.focusRemaining = 240
+    this.focusRunning = false
+    this.focusTime = '04:00'
+    this.focusAction = '开始引导'
+    this.breathPhase = '准备'
+    this.breathSeconds = '4s / 6s'
+    this.breathClass = ''
+  },
+
+  formatTime(value) {
+    const minute = Math.floor(value / 60)
+    const second = value % 60
+    return String(minute).padStart(2, '0') + ':' + String(second).padStart(2, '0')
+  },
+
+  localCoach(query) {
+    if (query.indexOf('记忆') >= 0) return '先完成 2 组 2-Back，每组 3 分钟。正确率连续两组超过 75% 后，再提升到 3-Back。'
+    if (query.indexOf('疲劳') >= 0) return '先暂停高强度训练，完成 4 分钟 4/6 呼吸；若疲劳仍高，今天以恢复为目标。'
+    if (query.indexOf('反应') >= 0) return '用低密度 BeatFlicks 热身 90 秒，再提高一档速度。动作幅度保持一致，优先保证准确。'
+    return '建议按“呼吸 4 分钟 → 2-Back 两组 → BeatFlicks 3 分钟”的顺序训练。'
+  },
+
+  askCoach(query) {
+    this.coachStatus = '正在分析五维训练数据…'
+    this.coachSource = 'AI'
+    velaclaw.ask({
+      query: '你是腕上认知训练教练。用户反应286毫秒、记忆正确率68%、节奏正确率88%。请用60字内回答：' + query,
+      success: (res) => {
+        this.coachAnswer = res.reply
+        this.coachStatus = '端侧 AI 已完成建议'
+        this.coachSource = 'VELACLAW'
+      },
+      fail: () => {
+        this.coachAnswer = this.localCoach(query)
+        this.coachStatus = 'AI 暂不可用，已启用本地建议'
+        this.coachSource = 'LOCAL'
+      }
+    })
+  },
+
+  askToday() { this.askCoach('今天怎么练？') },
+  askMemory() { this.askCoach('如何提升工作记忆？') },
+  askStress() { this.askCoach('今天感觉疲劳，怎么安排？') },
+  askReaction() { this.askCoach('如何提升反应速度？') }
+}
+</script>
+
+<style>
+.app-shell {
+  width: 466px;
+  height: 466px;
+  flex-direction: column;
+  background-color: #061314;
+  color: #f4fbf8;
+}
+.screen {
+  width: 466px;
+  height: 410px;
+  padding-left: 34px;
+  padding-right: 34px;
+  padding-top: 22px;
+  flex-direction: column;
+}
+.top-row { width: 398px; height: 58px; flex-direction: row; justify-content: space-between; align-items: flex-start; }
+.top-row.compact { height: 54px; }
+.eyebrow { font-size: 11px; color: #55dfaa; letter-spacing: 1px; }
+.title { font-size: 25px; font-weight: bold; color: #f4fbf8; margin-top: 3px; }
+.battery { font-size: 12px; color: #78918c; margin-top: 5px; }
+.tiny-chip { font-size: 10px; color: #8da39f; border-width: 1px; border-color: #26433f; border-radius: 12px; padding: 5px 8px; }
+.gold-text { color: #ffbf47; }
+.pink-text { color: #f378d5; }
+.blue-text { color: #48baf7; }
+.score-card { width: 398px; height: 94px; border-radius: 22px; background-color: #0d2222; flex-direction: row; align-items: center; padding: 12px 16px; }
+.score-ring { width: 70px; height: 70px; border-radius: 35px; border-width: 5px; border-color: #55dfaa; align-items: center; justify-content: center; flex-direction: column; }
+.score-number { font-size: 25px; font-weight: bold; color: #ffffff; }
+.score-label { font-size: 8px; color: #55dfaa; }
+.score-copy { width: 278px; padding-left: 16px; flex-direction: column; }
+.score-title { font-size: 16px; font-weight: bold; color: #f4fbf8; }
+.score-tip { font-size: 11px; color: #91a6a1; margin-top: 4px; }
+.metric-row { flex-direction: row; margin-top: 9px; }
+.metric { font-size: 9px; color: #b7cbc6; background-color: #15302e; border-radius: 8px; padding: 4px 7px; margin-right: 6px; }
+.section-title { font-size: 12px; color: #9cb0ab; margin-top: 12px; margin-bottom: 7px; }
+.module-row { width: 398px; height: 74px; flex-direction: row; justify-content: space-between; }
+.module-row.second-row { margin-top: 7px; }
+.module { width: 195px; height: 74px; border-radius: 17px; padding: 10px 12px; flex-direction: column; background-color: #0d2222; border-left-width: 3px; }
+.module.gold { border-left-color: #ffbf47; }
+.module.pink { border-left-color: #f378d5; }
+.module.green { border-left-color: #55dfaa; }
+.module.blue { border-left-color: #48baf7; }
+.module-icon { font-size: 14px; color: #f4fbf8; }
+.module-name { font-size: 13px; font-weight: bold; color: #f4fbf8; margin-top: 2px; }
+.module-meta { font-size: 9px; color: #7f9690; margin-top: 1px; }
+.author { font-size: 9px; color: #526c67; text-align: center; margin-top: 8px; }
+.bottom-nav { width: 466px; height: 56px; flex-direction: row; background-color: #081a1b; border-top-width: 1px; border-top-color: #17302e; justify-content: center; padding-left: 23px; padding-right: 23px; }
+.nav-item { width: 84px; height: 55px; flex-direction: column; align-items: center; justify-content: center; color: #617b75; }
+.nav-item.selected { color: #55dfaa; }
+.nav-icon { font-size: 17px; color: inherit; }
+.nav-label { font-size: 9px; color: inherit; margin-top: 1px; }
+.game-stats { width: 398px; height: 42px; flex-direction: row; justify-content: space-between; align-items: center; }
+.stat-label { font-size: 8px; color: #708985; }
+.stat-value { font-size: 17px; color: #f4fbf8; font-weight: bold; }
+.right { text-align: right; }
+.judgement { font-size: 15px; font-weight: bold; color: #ffbf47; }
+.lanes { width: 398px; height: 168px; flex-direction: row; background-color: #071b1c; border-radius: 18px; position: relative; overflow: hidden; }
+.lane { width: 132px; height: 168px; border-right-width: 1px; border-right-color: #183130; align-items: center; justify-content: center; }
+.lane.middle { background-color: #092021; }
+.note { width: 46px; height: 46px; border-radius: 23px; text-align: center; padding-top: 9px; font-size: 24px; font-weight: bold; color: #061314; }
+.green-note { background-color: #55dfaa; }
+.gold-note { background-color: #ffbf47; }
+.blue-note { background-color: #48baf7; }
+.hit-line { position: absolute; left: 10px; right: 10px; bottom: 20px; height: 2px; background-color: #6e8681; }
+.beat-hint { width: 398px; text-align: center; font-size: 10px; color: #77908b; margin-top: 7px; }
+.gesture-row { width: 398px; height: 58px; flex-direction: row; justify-content: space-between; margin-top: 7px; }
+.gesture-btn { width: 126px; height: 58px; background-color: #102827; border-radius: 16px; align-items: center; justify-content: center; flex-direction: column; font-size: 19px; color: #f4fbf8; }
+.gesture-btn.active-gesture { background-color: #17352f; }
+.gesture-label { font-size: 9px; color: #90a6a0; }
+.hardware-note { width: 398px; text-align: center; font-size: 9px; color: #57716b; margin-top: 8px; }
+.n-grid { width: 252px; height: 252px; margin-left: 73px; flex-direction: row; flex-wrap: wrap; border-radius: 28px; overflow: hidden; background-color: #0d2222; }
+.n-cell { width: 124px; height: 124px; margin: 1px; background-color: #102827; border-radius: 18px; }
+.active-green { background-color: #55dfaa; }
+.active-blue { background-color: #48baf7; }
+.active-gold { background-color: #ffbf47; }
+.active-pink { background-color: #f378d5; }
+.n-status { width: 398px; height: 46px; flex-direction: row; justify-content: space-between; align-items: center; margin-top: 7px; }
+.accuracy { font-size: 19px; color: #55dfaa; font-weight: bold; }
+.answer-row { width: 398px; height: 46px; flex-direction: row; justify-content: space-between; }
+.answer-btn { width: 195px; height: 43px; border-radius: 14px; background-color: #142d2b; align-items: center; justify-content: center; font-size: 13px; color: #f4fbf8; }
+.feedback { width: 398px; text-align: center; font-size: 11px; color: #f378d5; margin-top: 6px; }
+.breath-stage { width: 398px; height: 235px; align-items: center; justify-content: center; }
+.breath-orbit { width: 174px; height: 174px; border-radius: 87px; border-width: 2px; border-color: #2b5b54; background-color: #0b2725; align-items: center; justify-content: center; }
+.breath-orbit.inhale { width: 208px; height: 208px; border-radius: 104px; background-color: #123c36; border-color: #55dfaa; }
+.breath-orbit.exhale { width: 148px; height: 148px; border-radius: 74px; background-color: #0a211f; border-color: #287364; }
+.breath-core { width: 110px; height: 110px; border-radius: 55px; background-color: #55dfaa; align-items: center; justify-content: center; flex-direction: column; }
+.breath-phase { font-size: 18px; color: #061314; font-weight: bold; }
+.breath-seconds { font-size: 11px; color: #16483e; margin-top: 3px; }
+.timer { width: 398px; text-align: center; font-size: 30px; font-weight: bold; color: #f4fbf8; }
+.focus-copy { width: 398px; text-align: center; font-size: 10px; color: #829a94; margin-top: 3px; }
+.focus-actions { width: 398px; height: 44px; flex-direction: row; justify-content: center; margin-top: 10px; }
+.primary-btn, .secondary-btn { height: 42px; border-radius: 14px; align-items: center; justify-content: center; font-size: 12px; }
+.primary-btn { width: 188px; background-color: #55dfaa; color: #061314; }
+.secondary-btn { width: 110px; margin-left: 8px; background-color: #142d2b; color: #f4fbf8; }
+.coach-card { width: 398px; min-height: 126px; border-radius: 22px; background-color: #0d2222; border-left-width: 4px; border-left-color: #48baf7; padding: 15px; flex-direction: column; }
+.coach-kicker { font-size: 10px; color: #48baf7; }
+.coach-answer { font-size: 15px; line-height: 22px; color: #edf8f5; margin-top: 8px; }
+.quick-row { width: 398px; height: 48px; flex-direction: row; justify-content: space-between; }
+.quick-row.second-row { margin-top: 7px; }
+.quick-btn { width: 195px; height: 48px; border-radius: 15px; background-color: #142d2b; align-items: center; justify-content: center; font-size: 12px; color: #dcebe7; }
+.coach-status { width: 398px; height: 30px; flex-direction: row; align-items: center; justify-content: center; margin-top: 9px; font-size: 10px; color: #6f8982; }
+.status-dot { width: 7px; height: 7px; border-radius: 4px; background-color: #55dfaa; margin-right: 6px; }
+</style>
