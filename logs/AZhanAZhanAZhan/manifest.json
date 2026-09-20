@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0",
+  "team_id": "contest2026_133_yigetuandui",
+  "github_login": "AZhanAZhanAZhan",
+  "generator": "hermes-export@1.0",
+  "updated_at": "2026-09-20T14:45:49.189133+00:00",
+  "sessions": [
+    {
+      "session_id": "20260911_202648_d5a4d6",
+      "tool": "claude-code",
+      "started_at": "2026-09-11T12:29:47.730Z",
+      "last_event_at": "2026-09-11T14:21:28.075Z",
+      "event_count": 191,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-11/claude-code__20260911_202648_d5a4d6.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260911_222301_8826ea",
+      "tool": "claude-code",
+      "started_at": "2026-09-11T14:23:58.460Z",
+      "last_event_at": "2026-09-11T14:33:09.062Z",
+      "event_count": 30,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-11/claude-code__20260911_222301_8826ea.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260911_223427_8f1daf",
+      "tool": "claude-code",
+      "started_at": "2026-09-11T14:35:27.098Z",
+      "last_event_at": "2026-09-12T06:42:29.864Z",
+      "event_count": 721,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-11/claude-code__20260911_223427_8f1daf.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260912_144301_f50da7",
+      "tool": "claude-code",
+      "started_at": "2026-09-12T06:48:23.988Z",
+      "last_event_at": "2026-09-12T07:20:24.560Z",
+      "event_count": 356,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-12/claude-code__20260912_144301_f50da7.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260912_152500_74aa20",
+      "tool": "claude-code",
+      "started_at": "2026-09-12T07:30:23.218Z",
+      "last_event_at": "2026-09-13T05:48:27.340Z",
+      "event_count": 994,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-12/claude-code__20260912_152500_74aa20.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260913_134913_0f4847",
+      "tool": "claude-code",
+      "started_at": "2026-09-13T05:49:22.449Z",
+      "last_event_at": "2026-09-13T05:49:23.862Z",
+      "event_count": 854,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-13/claude-code__20260913_134913_0f4847.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260913_180658_d254b1",
+      "tool": "claude-code",
+      "started_at": "2026-09-13T10:08:01.056Z",
+      "last_event_at": "2026-09-14T11:09:51.944Z",
+      "event_count": 748,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-13/claude-code__20260913_180658_d254b1.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260914_191250_abd017",
+      "tool": "claude-code",
+      "started_at": "2026-09-14T11:14:05.379Z",
+      "last_event_at": "2026-09-14T11:39:17.850Z",
+      "event_count": 163,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-14/claude-code__20260914_191250_abd017.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260915_110645_2adf90",
+      "tool": "claude-code",
+      "started_at": "2026-09-15T03:07:50.423Z",
+      "last_event_at": "2026-09-15T05:33:20.532Z",
+      "event_count": 468,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-15/claude-code__20260915_110645_2adf90.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260915_111410_f715e5",
+      "tool": "claude-code",
+      "started_at": "2026-09-15T03:15:24.742Z",
+      "last_event_at": "2026-09-15T03:15:24.970Z",
+      "event_count": 57,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-15/claude-code__20260915_111410_f715e5.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260915_111411_7fd246",
+      "tool": "claude-code",
+      "started_at": "2026-09-15T03:15:10.450Z",
+      "last_event_at": "2026-09-15T03:15:10.691Z",
+      "event_count": 55,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-15/claude-code__20260915_111411_7fd246.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260915_111411_cd2370",
+      "tool": "claude-code",
+      "started_at": "2026-09-15T03:15:02.525Z",
+      "last_event_at": "2026-09-15T03:15:02.570Z",
+      "event_count": 27,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-15/claude-code__20260915_111411_cd2370.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260915_112153_3f1359",
+      "tool": "claude-code",
+      "started_at": "2026-09-15T03:22:56.615Z",
+      "last_event_at": "2026-09-15T03:22:56.676Z",
+      "event_count": 33,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-15/claude-code__20260915_112153_3f1359.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260915_112154_c2da01",
+      "tool": "claude-code",
+      "started_at": "2026-09-15T03:22:40.113Z",
+      "last_event_at": "2026-09-15T03:22:40.187Z",
+      "event_count": 34,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-15/claude-code__20260915_112154_c2da01.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260915_133650_4f368f",
+      "tool": "claude-code",
+      "started_at": "2026-09-15T05:36:56.346Z",
+      "last_event_at": "2026-09-15T05:36:56.433Z",
+      "event_count": 21,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-15/claude-code__20260915_133650_4f368f.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260916_212827_dddb44",
+      "tool": "claude-code",
+      "started_at": "2026-09-16T13:29:18.554Z",
+      "last_event_at": "2026-09-17T11:00:23.321Z",
+      "event_count": 736,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-16/claude-code__20260916_212827_dddb44.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260917_190137_e29e68",
+      "tool": "claude-code",
+      "started_at": "2026-09-17T11:02:39.682Z",
+      "last_event_at": "2026-09-17T11:09:29.865Z",
+      "event_count": 62,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-17/claude-code__20260917_190137_e29e68.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260919_123313_1a687e",
+      "tool": "claude-code",
+      "started_at": "2026-09-19T04:38:10.480Z",
+      "last_event_at": "2026-09-19T04:41:15.037Z",
+      "event_count": 7,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-19/claude-code__20260919_123313_1a687e.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    },
+    {
+      "session_id": "20260920_220931_54447b",
+      "tool": "claude-code",
+      "started_at": "2026-09-20T14:11:28.870Z",
+      "last_event_at": "2026-09-20T14:44:43.937Z",
+      "event_count": 217,
+      "file_path": "logs/AZhanAZhanAZhan/2026-09-20/claude-code__20260920_220931_54447b.jsonl",
+      "collection_mode": "backfill-sqlite",
+      "health": "ok",
+      "model": "deepseek-chat"
+    }
+  ]
+}
