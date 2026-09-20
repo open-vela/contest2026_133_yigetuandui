@@ -1,0 +1,42 @@
+# === 编译产物（不提交）===
+build/
+out/
+cmake_out/
+*.o
+*.a
+*.elf
+*.hex
+*.map
+*.su
+*.d
+
+# === 可执行文件与调试符号（本地测试用，不提交）===
+# 说明：仓库内只保留源码，可执行文件由使用者按 README 现场编译。
+#   hardware/host_test/run_test.sh  会生成 host_inject_test / host_full_test
+#   Aura_Space_Backend 的引擎测试由 src/ 现场 gcc 编译
+*.exe
+*.pdb
+*.ilk
+*.exp
+*.obj
+host_test/host_inject_test
+host_test/host_full_test
+engine_test
+Aura_Space_Backend/engine_test
+
+# === 编辑器与系统临时文件 ===
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# === 本地测试产出 ===
+host_test/*.log
+*.log
+
+# ============================================================
+# 重要：logs/ 下的 AI Coding 日志为大赛必交内容，禁止忽略！
+# 如需忽略 logs/ 内的临时文件，请精确指定文件名，不要忽略整个目录。
+# ============================================================

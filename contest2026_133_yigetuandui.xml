@@ -12,5 +12,14 @@
     <linkfile src="app/hello_app" dest="packages/demos/contest2026_133_hello_app"/>
     <linkfile src="quickapp/hello_quickapp" dest="packages/apps/contest2026_133_hello_quickapp"/>
     <linkfile src="board/contest_board" dest="vendor/openvela/boards/contest2026_133_board"/>
+    <!-- Aura-Space 心流节拍 — 板端固件（openvela 应用，黄山派 SF32LB52）。
+         映射到 openvela 编译树，使本目录被构建为 packages/demos/aura_hw，
+         生产仓库（packages/nuttx/vendor 等）保持零改动。
+         模块内容：IMU 200Hz 采样与手势识别、LVGL 四模块 UI
+         （BeatFlicks 音游 / Synapse-N 记忆矩阵 / Aura-Focus 呼吸 / AI Coach）、
+         PWM 振动反馈、五维数据 KV 持久化、Glicko-2 动态难度。
+         集成方式：构建配置中启用 CONFIG_EXAMPLES_AURA_HW 后，
+         串口控制台执行 `aura app` 启动图形应用。 -->
+    <linkfile src="app/aura_hw" dest="packages/demos/aura_hw"/>
   </project>
 </manifest>

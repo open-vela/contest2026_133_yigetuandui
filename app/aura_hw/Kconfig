@@ -1,0 +1,44 @@
+############################################################################
+# aura_hw/Kconfig
+# Aura-Space 黄山派板端服务的 openvela 应用配置
+############################################################################
+
+menuconfig EXAMPLES_AURA_HW
+	bool "Aura-Space hardware services (BeatFlicks)"
+	default n
+	depends on I2C_DRIVER && PWM && GRAPHICS_LVGL
+	---help---
+		Aura-Space 心流节拍项目的黄山派（SF32LB52）板端代码：
+		IMU 200Hz 采样、三种甩腕手势识别、PWM 振动反馈、
+		EventBus 通信、五维数据 KV 存储与 BeatFlicks 判定引擎。
+
+if EXAMPLES_AURA_HW
+
+config EXAMPLES_AURA_HW_IMU_PATH
+	string "IMU I2C device node"
+	default "/dev/i2c1"
+	---help---
+		板载 LSM6DS3TR-C 的 I2C 字符设备节点。
+		黄山派接线（vendor 板 sifli_ap.c 确认）：PA39=I2C2 SDA、
+		PA40=I2C2 SCL，I2C2 注册为 /dev/i2c1（触摸 I2C1 是 /dev/i2c0）。
+		LDO 使能（PA30）与 pinmux 由板级初始化完成。
+
+config EXAMPLES_AURA_HW_IMU_ADDR
+	hex "IMU I2C 7bit address"
+	default 0x6A
+	---help---
+		LSM6DS3TR-C 7bit 地址：SA0 接地 0x6A，接高 0x6B。
+
+config EXAMPLES_AURA_HW_PWM_PATH
+	string "Vibration motor PWM device node"
+	default "/dev/pwm0"
+	---help---
+		振动马达 PWM 设备节点。黄山派当前板级只注册 /dev/pwm0
+		（映射 GPTIM1/LED 引脚 PA32）；马达驱动引脚需按立创原理图
+		补充 pinmux 后改为此处对应节点。
+
+config EXAMPLES_AURA_HW_STACKSIZE
+	int "Main task stack size"
+	default 16384
+
+endif

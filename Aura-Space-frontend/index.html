@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#061314">
+  <meta name="description" content="Aura-Space 心流节拍：智能穿戴认知训练前端与 AI 教练演示">
+  <title>Aura-Space · 心流节拍</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23061314'/%3E%3Cpath d='M14 34c8-18 14 18 23-7s10 15 13 3' fill='none' stroke='%2355dfaa' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+  <div class="workspace">
+    <aside class="project-panel" aria-label="项目说明与调试控制">
+      <div class="brand-lockup">
+        <span class="brand-mark">FLOW</span>
+        <span class="brand-kicker">AURA-SPACE / FRONTEND DEMO</span>
+      </div>
+      <div class="project-copy">
+        <span class="eyebrow">秦嘉一 · 游戏 AI / 前端</span>
+        <h1>让算法变成<br><em>可感知的训练。</em></h1>
+        <p>独立完成表现层、动画渲染、专注分析与 AI 教练。后端、IMU 和 BLE 暂由接口契约与 Mock 数据代替。</p>
+      </div>
+      <div class="status-list">
+        <div><i class="status-dot"></i><span>前端模块</span><strong>可独立运行</strong></div>
+        <div><i class="status-dot"></i><span>数据来源</span><strong id="sourceLabel">Mock</strong></div>
+        <div><i class="status-dot"></i><span>平台接口</span><strong>已预留</strong></div>
+      </div>
+      <div class="integration-card">
+        <div class="integration-title">
+          <span>对接模式</span>
+          <span class="chip" id="connectionChip">LOCAL</span>
+        </div>
+        <div class="segmented" role="group" aria-label="数据模式">
+          <button class="is-active" data-mode="mock">Mock 数据</button>
+          <button data-mode="api">真实 API</button>
+        </div>
+        <label class="api-field">
+          <span>后端地址</span>
+          <input id="apiUrl" value="http://127.0.0.1:8080/api" spellcheck="false">
+        </label>
+        <button class="outline-button" id="saveConnection">保存并重新加载</button>
+      </div>
+      <div class="shortcut-note">
+        <span>音游快捷键</span>
+        <kbd>A</kbd><kbd>W</kbd><kbd>D</kbd>
+        <small>左甩 / 上抛 / 右甩</small>
+      </div>
+    </aside>
+
+    <section class="device-stage" aria-label="Aura-Space 设备模拟器">
+      <div class="device-shadow"></div>
+      <div class="device-frame">
+        <div class="device-crown"></div>
+        <div class="device-screen">
+          <header class="topbar">
+            <button class="wordmark" data-nav="home" aria-label="返回首页">FLOW</button>
+            <div class="device-health">
+              <span id="sampleRate">50Hz</span>
+              <i></i>
+              <span id="clock">09:41</span>
+              <span id="battery">76%</span>
+            </div>
+          </header>
+          <main id="viewRoot" class="view-root" tabindex="-1"></main>
+          <nav class="bottom-nav" aria-label="主导航">
+            <button data-nav="home" class="is-active"><span>⌂</span><small>今日</small></button>
+            <button data-nav="beat"><span>♪</span><small>音游</small></button>
+            <button data-nav="nback"><span>◇</span><small>记忆</small></button>
+            <button data-nav="focus"><span>◉</span><small>呼吸</small></button>
+            <button data-nav="coach"><span>✦</span><small>教练</small></button>
+          </nav>
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+      <p class="device-caption"><span></span> 浏览器设备模拟器 · 390 × 520 自适应画布</p>
+    </section>
+  </div>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "aura-space-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Aura-Space 心流节拍前端与 AI 教练独立演示模块",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node scripts/smoke.mjs"
+  }
+}
